@@ -6,6 +6,12 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface StoredAuth {
+    user: User;
+    accessToken: string;
+    refreshToken: string;
+}
+
 export interface LoginData {
   user: User;
   accessToken: string;

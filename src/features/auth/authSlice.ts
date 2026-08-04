@@ -1,7 +1,8 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit'
 import type { AuthState } from './types/auth.types'
-import type { LoginData } from './types/auth.dto';
+import type { LoginData, StoredAuth } from './types/auth.dto';
 import { loginUser } from './authThunk';
+import { storage } from '../../utils/storage';
 
 const initialState: AuthState = {
     user: null,
@@ -29,6 +30,11 @@ const authSlice = createSlice({
                         state.refreshToken = action.payload.refreshToken;
                         state.isAuthenticated = true;
                         state.error = null;
+                        storage.saveAuth({
+                            user: action.payload.user,
+                            accessToken: action.payload.accessToken,
+                            refreshToken: action.payload.refreshToken,
+                        })
                 })
                 .addCase(loginUser.rejected, (state) => {
                             state.loading = false;
@@ -38,14 +44,23 @@ const authSlice = createSlice({
 
     },
     reducers: {
+        restoreSession(state, action: PayloadAction<StoredAuth>){
+            state.user = action.payload.user;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
+            state.loading = false;
+            state.error = null;
+            state.isAuthenticated = true;
+        },
 
         logout(){
+            storage.clearAuth()
             return initialState;
         }
     }
 })
 
-export const { logout } = authSlice.actions
+export const { logout, restoreSession } = authSlice.actions
 
 export default authSlice.reducer;
 
