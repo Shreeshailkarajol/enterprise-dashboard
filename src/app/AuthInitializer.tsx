@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "./hooks"
 import { storage } from "../utils/storage";
-import { restoreSession } from "../features/auth/authSlice";
+import { initializeAuth, restoreSession } from "../features/auth/authSlice";
 
 
 const AuthInitializer = () => {
@@ -12,6 +12,8 @@ const AuthInitializer = () => {
         
         if(auth){
             dispatch(restoreSession(auth))
+        }else{
+            dispatch(initializeAuth())
         }
     },[dispatch])
 

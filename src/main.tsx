@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { BrowserRouter } from 'react-router-dom'
 import App from "./App";
 import { store } from "./app/store";
 import AuthInitializer from "./app/AuthInitializer";
@@ -20,7 +21,9 @@ enableMocking().then(() => {
     <React.StrictMode>
       <Provider store={store}>
         <AuthInitializer />
-        <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>
   );
