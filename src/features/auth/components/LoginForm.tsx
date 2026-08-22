@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { loginUser } from "../authThunk";
 
 import type { LoginRequest } from "../types/auth.dto";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormData {
   email: string;
@@ -16,6 +17,8 @@ const LoginForm = () => {
   const { loading, error } = useAppSelector(
     (state) => state.auth
 );
+
+const navigate = useNavigate()
 
   const {
     register,
@@ -34,6 +37,7 @@ const LoginForm = () => {
 
     if (loginUser.fulfilled.match(result)) {
       console.log("Login Successful");
+      navigate('/dashboard')
       // Later we'll navigate to Dashboard
     } else {
       console.log("Login Failed");

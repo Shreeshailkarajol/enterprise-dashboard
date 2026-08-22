@@ -4,7 +4,6 @@ import DashboardPage from './features/dashboard/pages/DashboardPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 
-
 function App() {
   return (
     <Routes>

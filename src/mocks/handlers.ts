@@ -37,4 +37,13 @@ export const handlers = [
       },
     });
   }),
+
+  http.get("/api/dashboard/summary", async () => {
+    return HttpResponse.json({
+      totalUsers: 1250,
+      totalProjects: 48,
+      totalRevenue: 2450000,
+      activeUsers: 875,
+    });
+  }),
 ];
