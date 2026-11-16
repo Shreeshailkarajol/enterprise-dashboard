@@ -8,7 +8,8 @@ export const UserService = {
             params: {
                 page,
                 search
-            }
+            }, 
+            requiresAuth: true,
         })
 
         return response.data

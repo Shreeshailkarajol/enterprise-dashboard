@@ -8,3 +8,10 @@ export const loginUser = createAsyncThunk(
         const data = await authService.login(request)
         return data
     })
+
+export const getCurrentUser = createAsyncThunk(
+    'auth/getCurrentUser',
+    async () => {
+        return await authService.getCurrentUser()
+    }
+)
